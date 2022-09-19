@@ -20,7 +20,7 @@ export default function Row ({isLargeLow, title, id, fetchUrl}) {
     <section>
       <h2>{title}</h2>
       <div className='slider'>
-        <div className='slider__arrow_left'>
+        <div className='slider__arrow-left'>
           <span className='arrow'>
             {"<"}
           </span>
