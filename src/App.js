@@ -1,4 +1,4 @@
-import './App.css';
+import './App.css'
 import Nav from './components/Nav';
 import Banner from './components/Banner';
 import Row from './components/Row';
@@ -6,7 +6,7 @@ import requests from './api/requests';
 
 function App() {
   return (
-  <div className='App'>
+  <div className='app'>
     <Nav />
     <Banner />
 

@@ -17,7 +17,7 @@ export default function Row ({isLargeLow, title, id, fetchUrl}) {
     console.log(request,'request')
   }
   return (
-    <section>
+    <section className='row'>
       <h2>{title}</h2>
       <div className='slider'>
         <div className='slider__arrow-left'>
