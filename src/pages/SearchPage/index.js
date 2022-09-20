@@ -8,7 +8,7 @@ export default function SearchPage() {
 
   let query = useQuery();
   const searchTerm = query.get('q')
-  const [searchResults, setSearchResults] = useState([]);
+  const [SearchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     if (searchTerm) {
