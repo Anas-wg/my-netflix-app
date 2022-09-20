@@ -1,11 +1,14 @@
 import axios  from '../api/axios';
 import React, { useEffect, useState } from 'react'
 import "./Row.css"
+import MovieModal from './MovieModal';
 
 
 //props 사용으로 정보 가져오기
 export default function Row ({isLargeLow, title, id, fetchUrl}) {
   const[movies, setMovies] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false)
+  const [movieSelected, setMovieSelected] = useState([])
 
   useEffect(() => {
     fetchMovieData();
@@ -17,11 +20,11 @@ export default function Row ({isLargeLow, title, id, fetchUrl}) {
     console.log(request,'request')
   }
 
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const handliClick = (movie) => {
+  const handleClick = (movie) =>{
     setModalOpen(true);
+    setMovieSelected(movie);
   }
+
   return (
     <section className='row'>
       <h2>{title}</h2>
@@ -42,6 +45,7 @@ export default function Row ({isLargeLow, title, id, fetchUrl}) {
                 isLargeLow ? movie.poster_path: movie.backdrop_path}`}
                 loading="lazy"
                 alt={movie.name}
+                onClick={() => handleClick(movie)}
                 />
         ))}
       </div>
@@ -51,6 +55,9 @@ export default function Row ({isLargeLow, title, id, fetchUrl}) {
       }}>
         <span className='arrow'>{">"}</span>
       </div>
+      {modalOpen && (
+        <MovieModal {...movieSelected} setModalOpen={setModalOpen} />
+      )}
     </section>
   )
 }
