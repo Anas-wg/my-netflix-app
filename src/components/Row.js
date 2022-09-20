@@ -16,12 +16,20 @@ export default function Row ({isLargeLow, title, id, fetchUrl}) {
     setMovies(request.data.results)
     console.log(request,'request')
   }
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handliClick = (movie) => {
+    setModalOpen(true);
+  }
   return (
     <section className='row'>
       <h2>{title}</h2>
       <div className='slider'>
         <div className='slider__arrow-left'>
-          <span className='arrow'>
+          <span className='arrow' onClick={() => {
+            document.getElementById(id).scrollLeft -= window.innerWidth - 80;
+          }}>
             {"<"}
           </span>
         </div>
@@ -32,11 +40,15 @@ export default function Row ({isLargeLow, title, id, fetchUrl}) {
                className={`row__poster ${isLargeLow && "row__posterLarge"}`}
                src={`https://image.tmdb.org/t/p/original/${
                 isLargeLow ? movie.poster_path: movie.backdrop_path}`}
+                loading="lazy"
                 alt={movie.name}
                 />
         ))}
       </div>
-      <div className='slider__arrow-right'>
+      <div className='slider__arrow-right'
+      onClick={() => {
+        document.getElementById(id).scrollLeft += window.innerWidth - 80;
+      }}>
         <span className='arrow'>{">"}</span>
       </div>
     </section>
