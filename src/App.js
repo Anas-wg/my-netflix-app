@@ -1,42 +1,32 @@
 import './App.css'
 import Nav from './components/Nav';
-import Banner from './components/Banner';
-import Row from './components/Row';
-import requests from './api/requests';
 import Footer from './components/Footer';
+import { Outlet, Route, Routes } from 'react-router-dom';
+import SearchPage from './pages/SearchPage';
+import MainPage from './pages/MainPage';
+import DetailPage from './pages/DetailPage';
+
+const LayOut = () => {
+  return (
+    <div>
+      <Nav />
+      <Outlet />
+      <Footer />
+    </div>
+  )
+}
+
 
 function App() {
   return (
   <div className='app'>
-    <Nav />
-    <Banner />
-
-    <Row 
-      //props 로 처리
-      title= "NETFLIX ORIGINALS"
-      id="NO"
-      fetchUrl={requests.fetchNetflixOriginals}
-      isLargeRow
-    />
-
-    <Row 
-      title="Trending Now"
-      id="TN"
-      fetchUrl={requests.fetchTrending}
-    />
-
-    <Row 
-      title="Top Rated"
-      id="TR"
-      fetchUrl={requests.fetchTopRated}
-    />
-    <Row 
-      title="Action Movies"
-      id="AM"
-      fetchUrl={requests.fetchActionMovies}
-    />
-
-    <Footer />
+      <Routes>
+        <Route path='/' element={<LayOut />}>
+          <Route index element={<MainPage />} />
+          <Route path=':movieId' element={<DetailPage />} />
+          <Route path='serarch' element={<SearchPage />}/>
+        </Route>
+      </Routes>
   
   </div>
   );
